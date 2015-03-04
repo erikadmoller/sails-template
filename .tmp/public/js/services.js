@@ -2,17 +2,20 @@ angular.module('basic.services', [])
 
 .factory('Validate', function() {
 	return {
-			credentials: function(htmlCredentials) {
-				// error Model
+			htmlCredentials: function(htmlCredentials) {
+				/* error Model */
 				var error = {
 					identifier: '',
 					password: ''
 				};
-				// credentials.identifier == false (if its falsy)
+				/* htmlCredentials.identifier is '' evalutates to false --> 
+				!false evals to true. Therfore, it runs the if(true) statement */
+
+				/* True its empty */
 				if(!htmlCredentials.identifier) {
 					error.identifier = 'Enter your email address';
 				}
-				else if(!validator.isEmail(htmlCredentials)) {
+				else if(!validator.isEmail(htmlCredentials.identifier)) {
 					error.identifier = 'The email address is not valid';
 				}
 
@@ -31,5 +34,5 @@ angular.module('basic.services', [])
 				}
 				return false;
 			}
-	}
-})
+	};
+});

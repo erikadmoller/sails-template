@@ -1,8 +1,12 @@
 angular.module('app', ['basic.controllers', 'ui.router'])
 .config(function($stateProvider, $urlRouterProvider) {
+	
+	
+	
 	$stateProvider
+
 	.state('home', {
-		url: '/home',
+		url: '/',
 		templateUrl: 'templates/home.html',
 		controller: 'homeCTRL'
 	})

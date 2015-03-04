@@ -1,4 +1,4 @@
-register
+Register
 <a ui-sref="home">home</a>
 
 <div ng-controller="registerCTRL" class="wrapper">
@@ -7,21 +7,18 @@ register
         <h1>Register</h1>
     </header>
 
-    <form ng-submit="submit(htmlCredentials)">
-
+    <form class="form" ng-submit="register(htmlCredentials)" novalidate>
+    <p class="error" ng-repeat="errorMessage in error.generic" ng-bind="errorMessage"></p>
             <!-- ng-model refers to credentials object(empty) in controller -->
             <h2>Email</h2>
-            <input type="text" ng-model="credentials.identifier" placeholder="Email" ng-bind="error.identifier">
+            <input type="text" ng-model="htmlCredentials.identifier" placeholder="Email" ng-bind="error.identifier">
 
             <!-- ng-model refers to credentials object(empty) in controller -->
             <h2>Password</h2>
-            <input type="password" ng-model="credentials.password" placeholder="Password" ng-bind="error.password">
+            <input type="text" ng-model="htmlCredentials.password" placeholder="Password" ng-bind="error.password">
 
-            <button>Submit</button>
+            <button type="submit">Submit</button>
     </form>  
-
-    <span ng-show="emailError">Enter a valid email</span>
-    <span ng-show="passwordError">Enter a valid password</span>
 
     <div>
         <a ui-sref="login">Login Page</a>

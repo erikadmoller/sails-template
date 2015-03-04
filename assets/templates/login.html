@@ -1,5 +1,4 @@
-login
-<a ui-sref="home">home</a>
+Login<a ui-sref="home">Home</a>
 
 <div ng-controller="loginCTRL" class="wrapper">
 
@@ -7,19 +6,18 @@ login
         <h1>Login</h1>
     </header>
 
-    <form ng-submit="submit(email, password)">
-
+    <form ng-submit="login(htmlCredentials)">
+        <p class="error" ng-repeat="errorMessage in error.generic" ng-bind="errorMessage"></p>
         <h2>Email</h2>
-        <input type="text" ng-model="email" placeholder="Email" ng-change="emailChg(email)">
+        <input type="text" ng-model="email" placeholder="Email" ng-model="credentials.identifer">
+        <p class="error" ng-bind="error.identifier"></p>
     
         <h2>Password</h2>
-        <input type="text" ng-model="password" placeholder="Website" name="Website" ng-change="passChg(password)">
+        <input type="password" ng-model="credentials.password" placeholder="Website" name="Website" ng-change="passChg(password)">
+        <p class="error" ng-bind="error.password"></p>
 
         <button>Submit</button>
     </form>  
-
-    <span ng-show="emailError">Enter a valid email</span>
-    <span ng-show="passwordError">Enter a valid password</span>
 
     <div>
         <a ui-sref="register">Register Page</a>
