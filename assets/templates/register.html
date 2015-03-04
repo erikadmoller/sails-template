@@ -7,13 +7,15 @@ register
         <h1>Register</h1>
     </header>
 
-    <form ng-submit="submit(email, password)">
+    <form ng-submit="submit(htmlCredentials)">
 
+            <!-- ng-model refers to credentials object(empty) in controller -->
             <h2>Email</h2>
-            <input type="text" ng-model="email" placeholder="Email" ng-change="emailChg(email)">
-        
+            <input type="text" ng-model="credentials.identifier" placeholder="Email" ng-bind="error.identifier">
+
+            <!-- ng-model refers to credentials object(empty) in controller -->
             <h2>Password</h2>
-            <input type="text" ng-model="password" placeholder="Website" name="Website" ng-change="passChg(password)">
+            <input type="password" ng-model="credentials.password" placeholder="Password" ng-bind="error.password">
 
             <button>Submit</button>
     </form>  
