@@ -1,0 +1,27 @@
+login
+<a ui-sref="home">home</a>
+
+<div ng-controller="loginCTRL" class="wrapper">
+
+    <header class="contact-us">
+        <h1>Login</h1>
+    </header>
+
+    <form ng-submit="submit(email, password)">
+
+        <h2>Email</h2>
+        <input type="text" ng-model="email" placeholder="Email" ng-change="emailChg(email)">
+    
+        <h2>Password</h2>
+        <input type="text" ng-model="password" placeholder="Website" name="Website" ng-change="passChg(password)">
+
+        <button>Submit</button>
+    </form>  
+
+    <span ng-show="emailError">Enter a valid email</span>
+    <span ng-show="passwordError">Enter a valid password</span>
+
+    <div>
+        <a ui-sref="register">Register Page</a>
+    </div>
+</div>
