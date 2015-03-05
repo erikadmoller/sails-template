@@ -2,13 +2,42 @@ angular.module('basic.controllers', ['basic.services'])
 .controller('homeCTRL', function($scope) {
 
 })
+.controller('assignmentCTRL', function($scope, $http, $state, Assalidate) {
+	$scope.error = {
+		title: '',
+		due: '',
+		link: '',
+		generic: []
+	};
+	$scope.htmlCredentials = {
+		title: '',
+		due: '',
+		link: ''
+	}
+
+	$scope.assign = function(htmlCredentials) {
+		$scope.error = Assalidate.htmlCredentials(htmlCredentials);
+		console.log($scope.error);
+
+		if(!Assalidate.hasError($scope.error)) {
+			console.log($scope.error);
+			var object = {
+					name: htmlCredentials.title,
+				 	dueOn: htmlCredentials.due,
+				 	url: htmlCredentials.link
+				 };
+			 console.log(object);
+		}
+	}
+
+})
 .controller('loginCTRL', function($scope, $http, $state, Validate) {
 	$scope.error = {
 		identifier: '',
 		password: '',
 		generic: []
 	};
-	$scope.credentials = {
+	$scope.htmlCredentials = {
 		identifier: '',
 		password: ''
 	};
@@ -17,6 +46,7 @@ angular.module('basic.controllers', ['basic.services'])
 
 	$scope.login = function(htmlCredentials) {
 		$scope.error = Validate.htmlCredentials(htmlCredentials);
+		console.log($scope.error);
 
 		if(!Validate.hasError($scope.error)) {
 			$http.post('/auth/local', htmlCredentials)
@@ -94,7 +124,10 @@ angular.module('basic.controllers', ['basic.services'])
 			 	console.log('Error!');
 			 	console.log(err);
 			 });
-		}
+			}	
+			else {
+				console.log($scope.error);
+			}
 	};
 	
-});
+})

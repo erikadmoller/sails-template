@@ -1,4 +1,4 @@
-Login<a ui-sref="home">Home</a>
+<a ui-sref="home">Home</a>
 
 <div ng-controller="loginCTRL" class="wrapper">
 
@@ -6,17 +6,20 @@ Login<a ui-sref="home">Home</a>
         <h1>Login</h1>
     </header>
 
-    <form ng-submit="login(htmlCredentials)">
-        <p class="error" ng-repeat="errorMessage in error.generic" ng-bind="errorMessage"></p>
-        <h2>Email</h2>
-        <input type="text" ng-model="email" placeholder="Email" ng-model="credentials.identifer">
-        <p class="error" ng-bind="error.identifier"></p>
-    
-        <h2>Password</h2>
-        <input type="password" ng-model="credentials.password" placeholder="Website" name="Website" ng-change="passChg(password)">
-        <p class="error" ng-bind="error.password"></p>
+       <form class="form" ng-submit="login(htmlCredentials)" novalidate>
+            <p class="error" ng-repeat="errorMessage in error.generic" ng-bind="errorMessage">
+            </p>
+            <!-- ng-model refers to credentials object(empty) in controller -->
+            <h2>Email</h2>
+            <input type="text" ng-model="htmlCredentials.identifier" placeholder="Email">
+            <span ng-bind="error.identifier"></span>
 
-        <button>Submit</button>
+            <!-- ng-model refers to credentials object(empty) in controller -->
+            <h2>Password</h2>
+            <input type="password" ng-model="htmlCredentials.password" placeholder="Password">
+
+            <button type="submit">Submit</button>
+            <span ng-bind="error.password"></span>
     </form>  
 
     <div>

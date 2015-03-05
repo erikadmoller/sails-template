@@ -35,4 +35,37 @@ angular.module('basic.services', [])
 				return false;
 			}
 	};
-});
+})
+
+.factory('Assalidate', function() {
+	return {
+			htmlCredentials: function(htmlCredentials) {
+				var error = {
+					title: '',
+					due: '',
+					link: ''
+				}
+
+				if(!htmlCredentials.title) {
+					error.title = 'Enter an assignment name';
+				}
+				if(!validator.isDate(htmlCredentials.due)) {
+					error.due = 'The date must be a date'
+				}
+				if(!validator.isURL(htmlCredentials.link)) {
+					error.link = 'Link must be a URL'
+				}
+				return error;
+			},
+
+			hasError: function(error) {
+				for(var i in error) {
+					if(error.hasOwnProperty(i) && error[i]) {
+						return true;
+					}
+				}
+				return false;
+			}
+
+	};
+})
