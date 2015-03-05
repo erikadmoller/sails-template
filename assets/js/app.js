@@ -23,6 +23,11 @@ angular.module('app', ['basic.controllers', 'ui.router'])
 		templateUrl: 'templates/assignment.html',
 		controller: 'assignmentCTRL'
 	})
+	.state('dashboard', {
+		url: '/dashboard',
+		templateUrl: 'templates/dashboard.html',
+		controller: 'dashboardCTRL'
+	})
 
 	$urlRouterProvider.otherwise('/login');
 })

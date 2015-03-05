@@ -41,19 +41,19 @@ angular.module('basic.services', [])
 	return {
 			htmlCredentials: function(htmlCredentials) {
 				var error = {
-					title: '',
-					due: '',
-					link: ''
+					name: '',
+					dueAt: '',
+					url: ''
 				}
 
-				if(!htmlCredentials.title) {
-					error.title = 'Enter an assignment name';
+				if(!htmlCredentials.name) {
+					error.name = 'Enter an assignment name';
 				}
-				if(!validator.isDate(htmlCredentials.due)) {
-					error.due = 'The date must be a date'
+				if(!validator.isDate(htmlCredentials.dueAt)) {
+					error.dueAt = 'Enter a date in 00/00/0000 format'
 				}
-				if(!validator.isURL(htmlCredentials.link)) {
-					error.link = 'Link must be a URL'
+				if(!validator.isURL(htmlCredentials.url)) {
+					error.url = 'Link must be a URL'
 				}
 				return error;
 			},

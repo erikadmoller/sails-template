@@ -2,17 +2,44 @@ angular.module('basic.controllers', ['basic.services'])
 .controller('homeCTRL', function($scope) {
 
 })
+.controller('NavCTRL', function($scope, $http, $state) {
+	$scope.logout = function() {
+		$http.get('/logout')
+		.success(function(logout) {
+			$state.go('login');
+		})
+		
+	}
+})
+.controller('dashboardCTRL', function($scope, $http, $state) {
+
+	$scope.dashboard = function(assignments) {
+		$scope.assignments = [];
+
+		$http.get('/assignment?sort=id DESC')
+		.success(function(assignments) {
+
+			console.log(assignments);
+			$scope.assignments = assignments;
+
+		})
+		.error(function(err) {
+				console.log('Error!');
+				console.log(err);
+		});
+	}
+})
 .controller('assignmentCTRL', function($scope, $http, $state, Assalidate) {
 	$scope.error = {
-		title: '',
-		due: '',
-		link: '',
+		name: '',
+		dueAt: '',
+		url: '',
 		generic: []
 	};
 	$scope.htmlCredentials = {
-		title: '',
-		due: '',
-		link: ''
+		name: '',
+		dueAt: '',
+		url: ''
 	}
 
 	$scope.assign = function(htmlCredentials) {
@@ -22,11 +49,28 @@ angular.module('basic.controllers', ['basic.services'])
 		if(!Assalidate.hasError($scope.error)) {
 			console.log($scope.error);
 			var object = {
-					name: htmlCredentials.title,
-				 	dueOn: htmlCredentials.due,
-				 	url: htmlCredentials.link
+					name: htmlCredentials.name,
+				 	dueAt: htmlCredentials.dueAt,
+				 	url: htmlCredentials.url
 				 };
 			 console.log(object);
+
+			 $http.post('/assignment', htmlCredentials)
+			.success(function(res) {
+				// console.log('success!');
+				// console.log(res);
+				if(res.success) {
+					$state.go('assignment');
+				}
+				else {
+					$scope.error.generic = res.errors;
+				}
+				console.log($scope.error);
+			})
+			.error(function(err) {
+				console.log('Error!');
+				console.log(err);
+			});
 		}
 	}
 

@@ -8,8 +8,8 @@
 module.exports = {
 
   attributes: {
-  	name: { type: 'string', unique: true},
-  	url: { type: 'string', unique: true},
+  	name: { type: 'string', required: true, unique: false},
+  	url: { type: 'string', required: true, unique: false},
   	dueAt: { type: 'datetime', unique: false}, //can have two assignments due at the same time = false //
   }
 };
